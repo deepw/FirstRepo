@@ -6,3 +6,4 @@ c. For "rotated string" type problems, see if s1+s1 helps in some way. Eg. 1.8.
 Some tips:
 - When dealing with 2D arrays, always easier to just work off of pointers. Check eg. 1.6. 
 
+more changes
