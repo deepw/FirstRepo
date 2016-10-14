@@ -54,12 +54,12 @@ void permute2(char *a, int l, int r)
 /* Driver program to test above functions */
 int main()
 {
-	int count[] = {2,1,1};
-	char str[] = "AABC";
+	int count[] = {1,1,2};
+	char str[] = "ACBC";
 	int n = strlen(str);
 	permute(str, 0, count, n-1);
 	printf ("next:\n");
-	permute2 (str, 0, n-1); 
+	//permute2 (str, 0, n-1); 
 	//printf ("%s\n", str);
 	return 0;
 }

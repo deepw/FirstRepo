@@ -30,11 +30,35 @@ int sum(char *input)
 	return total;
 }
 
+int 
+nested_sum (char *input)
+{
+	int i = 0;
+	int sum = 0;
+	int depth = 0;
+
+	while (input[i]) {
+		if (input[i] == '{') {
+			depth++;
+		} else if (input[i] == '}') {
+			depth--;
+		} else if (input[i] != ',') {
+			sum = sum + (depth * (input[i] - '0'));
+		}
+		i++;
+	}
+	return sum;
+}
+
+
+
 int main ()
 {
 	char str[] = "{{1,1},2,{1,1}}";
 	char str2[] = "{1,{4,{6}}}";
 	printf ("sum for %s is %d.\n", str2, sum(str2));
+	printf ("sum for %s is %d.\n", str2, nested_sum (str2));
 	printf ("sum for %s is %d.\n", str, sum(str));
+	printf ("sum for %s is %d.\n", str, nested_sum (str));
 	return 0;
 }

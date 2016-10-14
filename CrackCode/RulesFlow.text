@@ -125,7 +125,8 @@ Its interesting when you cannot use extra space of a stack, so you use recursion
 - Find a subarray with target sum is an interesting question already, but gets even better when array could have negative numbers. http://www.geeksforgeeks.org/find-subarray-with-given-sum-in-array-of-integers/
 - Interesting O(n) solution for the celebrity problem: a = 0; b=n-1; while (a<b) { if(M[a][b]) {a++;} else {b--;} } if a knows b then a is not a celebrity, if a does not know b, then b cannot be a celebrity. at the end verify that a/b is the celebrity indeed. 
 - Vertical Sum of binary tree put into a DLL: good question, asked at A9. http://www.geeksforgeeks.org/vertical-sum-in-binary-tree-set-space-optimized/
--  
+- Serializing and Deserializing Binary Tree: 1. For BST -> only preorder. 2. For ohter binary trees: either save both preorder and inroder OR save a marker [-1 ?] to mark NULL nodes and save only preorder. http://www.geeksforgeeks.org/serialize-deserialize-binary-tree/
+- Max points on the same line: For each point, find out the slope with each other point. Points with the same slope are on the same line. Now sort the slopes and find out how many are the same. Repeat this for each point and maintain the maximum. 
 
 
 
@@ -140,7 +141,7 @@ Practice again:
 3. Definitely go over Merge Sort and Quick Sort again. 
 4. aligned_malloc and aligned_free() implementation. void *aligned_malloc(size_t bytes, size_t alignment); void aligned_free(void *p );
 5. Find an element from rotated sorted array.
-6. Recursive solution to find minimum number of characters to add to make a string a palindrome.
+6. Recursive solution to find minimum number of characters to add to make a string a palindrome. Interesting problem: look at: http://www.geeksforgeeks.org/dynamic-programming-set-28-minimum-insertions-to-form-a-palindrome/
 7. Create a DLL out of a linked list. The idea is to recurse the left subtree and then the for the rightmost node in this left subtree, put root node on the right of it. Now for the right subtree, go to the left most node and then put root on the left of it. Return root. This implementation is by not using static variable. Using the static variable is a simpler solution but is not thread safe. @convert_bst_to_dll.c.
 8. Longest Palindromic subsequence. 
 9. Implement a lockless queue with consumer/producer.  
@@ -175,7 +176,15 @@ Sorting:
 - Merge Sort: split at half, recursive for first half, second half and then merge. merge is just simply picking up the smaller one using auxillary space. 
 - Quick Sort: partition at some pivot point. find the i where the pivot should be placed and then swap. 
 
+---------------------
+Other Hard Problems:
+---------------------
+1. Find if a given string can be represented from a substring by iterating the substring “n” times. 
+http://www.geeksforgeeks.org/find-given-string-can-represented-substring-iterating-substring-n-times/
+
+----------------------
 Interviews:
+----------------------
 
 06/11: Microsoft Online Technical Screen for Azure Networking Team:
 1. String given with phone numbers in format yyyxxxzzz or yyy-xxx-zzzz, reformat them to be xxx-yyy-zzzz. Use minimal extra storage.
@@ -230,14 +239,14 @@ Lunch with Matt
 - Insert a node to a directed graph. 
 - Find shortest path between two points. 
  
-
-
+Second Design Onsite Interview: 08/08
+- Get k nearest points given a point. k-d tree problem
 
 
 Google: 
 07/12:
 Phone interview:
-1. Evaluate a polynomial. f(x)=3x2 + 2x + 3, f(n) = ?. Do without using power function. 
+1. Evaluate a polynomial. f(x)=3x2 + 2x + 3, f(n) = ?. Do without using power function, just go in a loop of power number and multiplying x to it.  
 2. pack a string []. Couldnt suggest escape sequence. 
 Second Phone interview: 07/25:
 1. Design two APIs. Addpoint (arr, x, y) and then Get_k_closest_points (arr, x, y). I provided solution where a heap is created for the given point x,y every time Get_k is called. 
@@ -249,10 +258,62 @@ Second hour:
 1. string with digits and characters, get the sum of all numbers formed in a string. 123?sdfh77 => 200
 2. Interval Tree question  http://www.geeksforgeeks.org/interval-tree/. 
 
+08/04: Linkedin Onsite:
+#1. describe your project on the board. consistent hashing
+#2. Design a sliding window based getAvg and getValue APIs for stock prices. Updates with {name, price}
+#3. Provide AddDrop(double center_of_the_drop) and isWalkwayWet() APIs for rain drops. Interval tree, merging overlapping intervals. 
+#4. merge k sorted linked lists. find second smallest number in a tournament tree. Root of the tournament tree is the minimum element in the tree. 
+#5. design url shortening service. concurrent hashing.
+#6. Design a pub sub model with some specific constraints. concurrent hashing. 
+
+
 07/20: A9 Phone:
 1. Given an expression calculate the value (2*3)/(5+6). Store in some data structure and evaluate the expression. 
 2. Described projects. 
 
+09/01 Uber Onsite: 555 Market Street
+#1. Implement Task Queue for Uber trip reservation. Discussion around granulated locks.
+#2. Design system with multiple tiers and calculating data loss percentage. Every tier keeps list of holes and passes this to the next tier. The last tier merges all and finds data loss. 
+#3. Hiring Manager, introductions. 
+#4. Behavioral round, biggest failure, conflict with colleague, why Uber. 
+#5. Interator for recursive list, H20 problem. 
+http://massivetechinterview.blogspot.com/2015/11/linkedin-h2o.html
+
+
+09/07 Cask Phone Interview:
+#1. Project work / Experience
+#2. Move all target numbers to the end of an array. 
+#3. Discussion around Java and C comparisons. 
+
+
+09/09 Cloudera Phone Interview:
+#1. Project  / Experience
+#2. Implement Circular Buffer. A queue using a fixed size array.  
+
+09/14: Cask Data Onsite: 2pm-6pm.
+#1. Given k sorted lists, find the minimum range that covers all lists. https://www.careercup.com/question?id=16759664
+#2. Project Description and discussions
+#3. Given k iterators for sorted streams, write an iterator over all of the given iterators. Basically merge k sorted lists. 
+#4. Mgr Interview, heartbeat related design question and project discussions. 
+
+09/23: MapR phone interview
+There was another interview of 30 mins with the hiring manager, this was the second one for an hour with engineer. 
+- First 30 mins about my experience and corss questioning
+- Implement printdivision(int num, int den) -> 1/3 = 0.3[0] so only print the repeating sequence once and then in the bracket print which index it starts from. Used a hash for remainders. 
+
+09/26: Cloudera Onsite
+#1 Experience. Fibonacci, optimize for constant memory. Security related questions, that I couldnt answer. hit browser what happens. 
+#2 Experience, discussions around it. How many DVRs required for recording programs that can overlap. The train-platform problem. 
+#3 Circular Buffer using array, handle full/empty using conditional variables. {(I believe) This guy dissed me for not using two seperate cond variables.  } http://stackoverflow.com/questions/4062126/can-2-pthread-condition-variables-share-the-same-mutex
+#4 Manager lunch, behavioral. Why did you leave Cisco, example of initiative, leadership roles etc.
+#5 Count_bits (char *ptr, int size) count all set bits from ptr to size bytes. Design system with thermostat updating temperature that app reads. Up/Down temperature from app. 
+
+Got a reject on 9/28. Feedback: With only one position open, they want someone stronger/better experience in: Java, Database concepts, concurrency, RPC, REST.
+
+09/30: 
+Phone interview with Manager from Apache Drill Team. 
+- Discussed projects etc. 
+- How do you find top n most frequently occuring URLs from a very big file consisting URLs. Could not answer this completely. Use consistent hashing to split the URLs into multiple hash tables. 
 
 Notes on other Questions:
 1. Tower of Hanoi Problem:
@@ -277,4 +338,8 @@ Design Questions Notes:
 Steps from Hiredtech Article: http://www.hiredintech.com/system-design/the-system-design-process/
 1. Gather requirements, system constraints, scope of the the system, 
 -
+ 
+
+Send closure emails to 
+- Juniper and Riverbed. 
  
