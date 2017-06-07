@@ -1,5 +1,7 @@
 /* 
- * 1.1 Implement an algorithm to determine if a string has all unique characters. What if you can not use additional data structures?
+ *  Assume you have a method isSubstring which checks if one word is a substring of
+another. Given two strings, s1 and s2, write code to check if s2 is a rotation of s1 using
+only one call to isSubstring (i.e., “waterbottle” is a rotation of “erbottlewat”). 
 */
 
 /* Another interesing way to check this is to see if s2 is a substring of concat(s1, s1). */

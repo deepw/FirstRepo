@@ -3,7 +3,10 @@ a. Can you use bitmasks ?
 b. Can you use sorting ? If you are trying to search something in a sorted array, see if binary search applies. 
 c. For "rotated string" type problems, see if s1+s1 helps in some way. Eg. 1.8. 
 
+================================
+================================
 Some tips:
+================================
 - When listing all the data structures that you could use to solve a problem or find a more efficient way to solve it, think of all data structures possible. BST, MinHeap, MaxHeap, Hashmap, Stack. Simplifying a unix path is a typical example where you could use a stack to simplify the solution. If you see a . ignore, .. pop, else push. at the end construct the path with whatever is left in the stack. 
 - When dealing with 2D arrays, always easier to just work off of pointers. Check eg. 1.6. 
 - For tree question, try to see apply patterns of: preorder traversal, BFS/DFS traversals etc. Eg. Find if T2 is a subtree of T1. Recursively walk two trees to check if they are identical. For each child of root, check if the subtree is same as root.  You could also generate inorder+preorder of both trees and then check if the subtree is a substring of both the orders. 
@@ -55,8 +58,15 @@ while (mid<=hi) { switch (mid) { case 0: swap a[mid] a[low] low++; mid++; case 1
 - External sorting typically uses a hybrid sort-merge strategy. In the sorting phase, chunks of data small enough to fit in main memory are read, sorted, and written out to a temporary file. In the merge phase, the sorted subfiles are combined into a single larger file.
 - For data bases, normalization is basically rearranging tables to remove duplicate data. Denormalization will duplicate data but will reduce look up times, plus will add complexity to keep duplicate data in sync [using constraints]. 
 - Inner Join where only common key values are used, Outer Join where all values are included. 
+- Always check for boundary conditions. Like array starting at 0 etc. 
+- volatile keyword tells compiler to not optimize code because the value of that variable could change somehwere else in the code, like multithreaded aplication, ISR etc. 
 
+===========================================
+===========================================
 Other interesting questions:
+===========================================
+
+- Sort a Stack. You another stack to solve this. If you cant push the next element to the new stack because it violates the order, keep popping and pushing to the original stack till you can. 
 - To find median of two sorted arrays, compare the two medians and drop half each from both arrays and repeat.
 - To find a target sum in an array, sort the array, set pointers to start and end and move them closer to each other.  
 - To find a subarray with a target sum, keep two pointers, i, j. increment j when current sum < target and increment i otherwise. 
@@ -127,9 +137,12 @@ Its interesting when you cannot use extra space of a stack, so you use recursion
 - Vertical Sum of binary tree put into a DLL: good question, asked at A9. http://www.geeksforgeeks.org/vertical-sum-in-binary-tree-set-space-optimized/
 - Serializing and Deserializing Binary Tree: 1. For BST -> only preorder. 2. For ohter binary trees: either save both preorder and inroder OR save a marker [-1 ?] to mark NULL nodes and save only preorder. http://www.geeksforgeeks.org/serialize-deserialize-binary-tree/
 - Max points on the same line: For each point, find out the slope with each other point. Points with the same slope are on the same line. Now sort the slopes and find out how many are the same. Repeat this for each point and maintain the maximum. 
+- Recursion question to print all combination of parantheses. 
+- Pretty interesting system design problem: Given an input file with four billion integers, provide an algorithm to generate an integer which is not contained in the file. Assume you have 1 GB of memory. FOLLOW UP: What if you have only 10 MB of memory?
 
-
-
+============================================
+END OF OTHER INTERESTING PROBLEMS
+============================================
 
 - Techniques of Better than Brute Force 
 	- Try to see if using a hash table is feasible. That increases the space complexity by O(n) but the insert and lookups could be O(1) reducing the overall time complexity. 
@@ -311,9 +324,9 @@ There was another interview of 30 mins with the hiring manager, this was the sec
 Got a reject on 9/28. Feedback: With only one position open, they want someone stronger/better experience in: Java, Database concepts, concurrency, RPC, REST.
 
 09/30: 
-Phone interview with Manager from Apache Drill Team. 
+Phone interview with Manager from Apache Drill Team. MapR.
 - Discussed projects etc. 
-- How do you find top n most frequently occuring URLs from a very big file consisting URLs. Could not answer this completely. Use consistent hashing to split the URLs into multiple hash tables. 
+- How do you find top n most frequently occuring URLs from a very big file consisting URLs. Could not answer this completely. Use consistent hashing to split the URLs into multiple hash tables. The point to note is that when hash is created, the entry can be placed on a hash table on the machine hash%N where N is the total number of machines. 
 
 Notes on other Questions:
 1. Tower of Hanoi Problem:
@@ -361,4 +374,43 @@ USE THIS NEXT TIME:
 3. PREPARE A LOT BEFORE GOING INTO THE CALL. 
 4. BEFORE AGREEING ALWAYS KEEP SOME SIDEKICK READY. 
 I did not think about what I would
- 
+
+
+--------------------------------------------------------------------
+So Cask laid off 30% of the workforce today. 14/50 people were laid of 06/01/2017. I was one of them. So here we are starting all over again with the preperation. 
+
+06/02:
+Java Lessons:
+1. Characters when read into integers read their ASCII codes. 
+2. Bitwise operations work just as they work in C. So thats good. 
+3. The for loop like C works, additionally for arrays/lists you can say for ( String str : args) {} to walk over all the strings in the args array of strings. 
+4. Setting up an array is kinda different in Java: Eg. char[] resultArray = new char[arg.length()];
+5. For string manipulation questions you can form a character array and then use new String(resultArray) to create a string out of it.  
+6. Very useful to learn how to declare a Map: Map<Character, Integer> map = new HashMap<Character, Integer>();
+	- Using generics provides a certain level of type safety. 
+	- Keeping map as a Map and not a HashMap makes it easier to change implementations (to a TreeMap or a LinkedHashMap) in the future.
+	- Also they need to be Object and not native types. 
+	- Map supports put, get, remove, size methods. 
+7. Passing a 2d Array: makeZeroes(int[][] input, int rows, int cols). Also I could change the values inside this array using this. 
+8. There are several differences between HashMap and Hashtable in Java:
+	a. Hashtable is synchronized, whereas HashMap is not. This makes HashMap better for non-threaded applications, as unsynchronized Objects typically perform better than synchronized ones.
+	b. Hashtable does not allow null keys or values.  HashMap allows one null key and any number of null values. This is the reason when using generics for defining Map you need the Objects and not primitive values. 
+	c. One of HashMap's subclasses is LinkedHashMap, so in the event that you'd want predictable iteration order (which is insertion order by default), you could easily swap out the HashMap for a LinkedHashMap. This wouldn't be as easy if you were using Hashtable.
+9. Singleton Design Pattern: 1. private constructor. 2. private static variable of the same class. 3. public static method to initiate and/or get the instance of the class. This is not thread safe so you can wrap the creation inside a synchronized block. More at: http://www.journaldev.com/171/thread-safety-in-java-singleton-classes-with-example-code
+10. Factory Pattern: When you want to hide the object creation logic. Eg. Location, could be on DFS, or local file system. 
+11. public classes need to be in the files with the same name. For writing programs you can you package-private clasess. 
+12. HashSet can be iterated over using for(String str : set) but the order is not guaranteed. You could instead use LinkedHashSet twhich keeps the order intact. 
+13. Scanner in = new Scanner (new FileReader("test.txt")); while(in.hasNextInt()) {int n = in.nextInt()} is a optimal way to read files, one integer at a time. 
+14. Java provides Bitset bs = new Bitset(32001); to solve all bit problems. Careful, bitset index start at 1. 
+15. The protected modifier specifies that the member can only be accessed within its own package (as with package-private) and, in addition, by a subclass of its class in another package.
+16. Java also has semaphores.
+17. Priority Queue is implemented using a Heap. KLargest can be very simply solved using :
+    for (int i : array) {
+      pq.offer(i);
+      if (pq.size() > K) {
+        pq.poll();
+      }   
+    }   
+poll() removed the minimum element or the head of the queue. offer() adds a new element to the queue. 
+To convert to a MaxHeap, just use: new PriorityQueue<Integer>(10, Collections.reverseOrder());
+18. 

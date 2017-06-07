@@ -1,3 +1,9 @@
+/* There is one way of using a map from current list to the new list nodes. Create this map in the first walk of the list. 
+ * then walk the list again and using the map adjust the next and random pointers of the new list.
+ * The method used here removes the need of a map by just keeping the nodes attached to the current nodes. 
+ * In the second walk it adjusts the random pointers. 
+ * In the third walk seperates the two lists out.
+ */ 
 #include <stdio.h>
 
 typedef struct Node {
