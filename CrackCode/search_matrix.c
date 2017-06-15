@@ -29,7 +29,7 @@ int BinarySearch(int arr[3][4], int target, int R, int C)
 	while (start <= end) {
 		mid = start + (end-start)/2;
 		row = mid / C;
-		col = mid - (R*row);
+		col = mid % C;
 
 		num = arr[row][col];
 		if (target > num) {

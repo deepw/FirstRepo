@@ -1,4 +1,4 @@
-import java.util.*; 
+import java.util.*;
 
 public class AnagramStrings {
   public static void main (String[] args) {

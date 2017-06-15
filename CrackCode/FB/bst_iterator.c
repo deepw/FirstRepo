@@ -37,7 +37,7 @@ push (Node **Head, Treenode *data)
 Treenode *
 pop (Node **Head) 
 {
-        if (*Head == NULL) return 0;
+        if (*Head == NULL) return NULL;
 
         Node *tmp = *Head;
 
