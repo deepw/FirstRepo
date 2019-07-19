@@ -1,0 +1,49 @@
+import java.util.Random;
+    class Card {
+      public int number;
+      int suit;
+      Card (int n, int s) {
+        this.number = n;
+        this.suit = s;
+      }
+    }
+
+    class Deck {
+        public Card[] deck;
+        Deck(int s) {
+            deck = new Card[s];
+        }
+    }
+
+
+class Shuffle {
+    Random rand = new Random();
+    public void shuffleDeck(Card[] deck, int n) {
+        if (n == 1) {
+            return;
+        }
+
+        int pos = rand.nextInt(n-1);
+        Card temp = deck[n-1];
+        deck[n-1] = deck[pos];
+        deck[pos] = temp;
+
+        shuffleDeck(deck, n-1);
+    }
+
+
+    public static void main (String[] args) {
+        Shuffle s = new Shuffle();
+        Deck d = new Deck(5);
+        d.deck[0] = new Card(0, 0);
+        d.deck[1] = new Card(1, 0);
+        d.deck[2] = new Card(2, 0);
+        d.deck[3] = new Card(3, 0);
+        d.deck[4] = new Card(4, 0);
+        s.shuffleDeck(d.deck, d.deck.length);
+        for (int i=0; i<d.deck.length; i++) {
+            System.out.println(d.deck[i].number);
+        }
+        return;
+    }
+}
