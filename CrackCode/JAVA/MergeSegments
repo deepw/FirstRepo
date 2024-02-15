@@ -1,0 +1,70 @@
+import java.util.ArrayList;
+import java.util.List;
+
+//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+public class Main {
+
+   // Time Complexity O(M) Space Complexity O(N)
+    public static int findSmallest (int[] arr, List<Integer> segmentStartIndex, List<Integer> segmentLastIndex) {
+        int i = 0; int smallest = 100000;// only solving for small numbers
+        int segmentNumber = 0;
+        while (i < segmentStartIndex.size()) {
+            if (segmentStartIndex.get(i) <= segmentLastIndex.get(i) && arr[segmentStartIndex.get(i)] < smallest) {
+                smallest = arr[segmentStartIndex.get(i)];
+                segmentNumber = i;
+
+            }
+            i++;
+        }
+        // Move the index forward for segment where smallest was found.
+        segmentStartIndex.set(segmentNumber, segmentStartIndex.get(segmentNumber)+1);
+        System.out.println("Smallest = " + smallest);
+        return smallest;
+    }
+
+    public static void main(String[] args) {
+        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
+        // to see how IntelliJ IDEA suggests fixing it.
+        //System.out.printf("Hello and welcome!");
+        //                    0,1,2,3,4,5,6,7,08,09,10,11,12,13
+        int[] arr = new int[]{1,2,3,5,2,3,4,6,10,20,30,11,12,23};
+
+        List<Integer> segmentStartIndex = new ArrayList<Integer>();
+        List<Integer> segmentLastIndex = new ArrayList<Integer>();
+
+        segmentStartIndex.add(0);
+        // Time Complexity O(N) Space Complexity O(M) for M segments in the array (M<=N)
+        for (int i = 1 ; i < arr.length ; i++) {
+            if (arr[i] < arr[i-1]) {
+                segmentStartIndex.add(i);
+                segmentLastIndex.add(i-1);
+            }
+        }
+        segmentLastIndex.add(arr.length-1);
+        
+        // Just checking
+        for (int i = 0; i < segmentStartIndex.size(); i++) {
+            System.out.println("Segment start index : " + segmentStartIndex.get(i));
+            System.out.println("Segment last index : " + segmentLastIndex.get(i));
+        }
+
+        // Time Complexity O(N), Space Complexity O(N)
+        int[] sortedArray = new int[arr.length];
+        for (int i = 0 ; i < arr.length ; i++) {
+            sortedArray[i] = findSmallest(arr, segmentStartIndex, segmentLastIndex);
+        }
+
+        System.out.print("UN-Sorted array: [");
+        for (int i = 0; i< arr.length; i++) {
+            System.out.print(arr[i] + ", ");
+        }
+        System.out.println("]");
+        System.out.print("Sorted array: [");
+        for (int i = 0; i< sortedArray.length; i++) {
+            System.out.print(sortedArray[i] + ", ");
+        }
+        System.out.println("]");
+
+    }
+}
